@@ -12,7 +12,7 @@ defmodule Mixfile do
 
   defp deps do
     [
-      {:emlx, github: "elixir-nx/emlx", branch: "main"},
+      {:emlx, github: "elixir-nx/emlx", branch: "main", sparse: "emlx"},
       # {:exla, "~> 0.12.0"},
       {:nx, "~> 0.12.0"},
     ]

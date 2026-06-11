@@ -70,8 +70,8 @@ defmodule NxTests do
       
     y = 1..30//2 |> Range.to_list() |> Enum.map(fn y -> y*y end) |> Nx.tensor()
 
-    pinv_jit = Nx.Defn.jit(fn x, y -> pinv_loop(x, y) end, compiler: EXLA)
-    mat_jit = Nx.Defn.jit(fn x, y -> mat_loop(x, y) end, compiler: EXLA)
+    pinv_jit = Nx.Defn.jit(fn x, y -> pinv_loop(x, y) end, compiler: EMLX)
+    mat_jit = Nx.Defn.jit(fn x, y -> mat_loop(x, y) end, compiler: EMLX)
     
     "first run" |> IO.inspect()
     fn -> pinv_loop(x, y) end |> :timer.tc() |> IO.inspect()
