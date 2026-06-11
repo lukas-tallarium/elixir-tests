@@ -61,8 +61,8 @@ defmodule NxTests do
     
   def jit_loop_test() do
 
-    x1 = 1..150 |> Range.to_list()
-    x2 = 1..300//2 |> Range.to_list() |> Enum.map(fn x -> x*(x+1) end)
+    x1 = 1..1500 |> Range.to_list()
+    x2 = 1..3000//2 |> Range.to_list() |> Enum.map(fn x -> x*(x+1) end)
     x = Enum.zip(x1, x2)
     |> Enum.map(fn {x1, x2} ->
       [x1, x2]
@@ -85,6 +85,19 @@ defmodule NxTests do
     fn -> pinv_jit.(x, y) end |> :timer.tc() |> IO.inspect()
     fn -> mat_jit.(x, y) end |> :timer.tc() |> IO.inspect()
     
+
+    "third run" |> IO.inspect()
+    x1 = 1..1500 |> Range.to_list() |> Enum.map(fn x -> 3*x end)
+    x2 = 1..3000//2 |> Range.to_list() |> Enum.map(fn x -> x*(x+1) end)
+    x = Enum.zip(x1, x2)
+    |> Enum.map(fn {x1, x2} ->
+      [x1, x2]
+    end)
+    fn -> pinv_loop(x, y) end |> :timer.tc() |> IO.inspect()
+    fn -> mat_loop(x, y) end |> :timer.tc() |> IO.inspect()
+    fn -> pinv_jit.(x, y) end |> :timer.tc() |> IO.inspect()
+    fn -> mat_jit.(x, y) end |> :timer.tc() |> IO.inspect()
+
     :ok
   end
 
